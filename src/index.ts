@@ -68,3 +68,4 @@ big.max = (...values: BigSource[]) => {
 };
 
 export { big };
+export { type BigSource, type BigExtendedInstance as Big, type BigFactory };
