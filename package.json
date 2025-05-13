@@ -1,6 +1,6 @@
 {
 	"name": "@almazod/extbigjs",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "big.js with extra features",
 	"type": "module",
 	"scripts": {
