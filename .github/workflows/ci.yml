@@ -3,8 +3,6 @@ name: CI
 on:
     push:
         branches: [main]
-    pull_request:
-        branches: [main]
 
 jobs:
     release:
@@ -12,9 +10,12 @@ jobs:
         if: "!contains(github.event.head_commit.message, 'skip-release') && !contains(github.event.head_commit.message, 'skip-ci') && github.event_name != 'pull_request'"
         steps:
             - uses: actions/checkout@v3
+
             - uses: actions/setup-node@v3
               with:
                   node-version: 22.x
+                  registry-url: "https://registry.npmjs.org/"
+
             - name: Cache ~/.pnpm-store
               uses: actions/cache@v4
               env:
@@ -26,9 +27,12 @@ jobs:
                       ${{ runner.os }}-${{ matrix.node-version }}-release-${{ env.cache-name }}-
                       ${{ runner.os }}-${{ matrix.node-version }}-release-
                       ${{ runner.os }}-
+
             - run: npm i -g pnpm
+
             - run: pnpm i
-            - run: pnpm dlx semantic-release@20 --branches main
+
+            - name: Publish to npm
+              run: pnpm publish --no-git-checks
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
