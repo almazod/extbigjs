@@ -1,0 +1,36 @@
+{
+	"name": "@almazod/extbigjs",
+	"version": "0.0.1",
+	"description": "big.js with extra features",
+	"type": "module",
+	"scripts": {
+		"build": "tsup",
+		"test": "vitest run",
+		"prepublishOnly": "pnpm run build"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"url": "https://github.com/almazod/extbigjs"
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"exports": {
+		"require": "./dist/index.cjs",
+		"import": "./dist/index.js"
+	},
+	"types": "./dist/index.d.ts",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/big.js": "^6.2.2",
+		"big.js": "^7.0.1",
+		"prettier": "3.5.3",
+		"tsup": "8.4.0",
+		"typescript": "5.8.3",
+		"vitest": "3.1.3"
+	}
+}
